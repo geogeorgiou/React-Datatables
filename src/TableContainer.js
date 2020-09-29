@@ -1,14 +1,20 @@
 import React, { Fragment } from 'react';
 import {
     useTable,
-    useSortBy,
+    // useSortBy,
     useFilters,
     useExpanded,
     usePagination,
 } from 'react-table';
 
-import { Table, Row, Col, Button, Input, CustomInput } from 'reactstrap';
-import { Filter, DefaultColumnFilter } from './filters';
+import {
+    Table,
+    Row,
+    Col,
+    Button,
+    // Input,
+    CustomInput } from 'reactstrap';
+// import { Filter, DefaultColumnFilter } from './filters';
 
 const TableContainer = ({ columns, data, renderRowSubComponent }) => {
     const {
@@ -31,27 +37,27 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
         {
             columns,
             data,
-            defaultColumn: { Filter: DefaultColumnFilter },
+            // defaultColumn: { Filter: DefaultColumnFilter },
             initialState: { pageIndex: 0, pageSize: 10 },
         },
         useFilters,
-        useSortBy,
+        // useSortBy,
         useExpanded,
         usePagination
     );
 
-    const generateSortingIndicator = (column) => {
-        return column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : '';
-    };
+    // const generateSortingIndicator = (column) => {
+    //     return column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : '';
+    // };
 
     const onChangeInSelect = (event) => {
         setPageSize(Number(event.target.value));
     };
 
-    const onChangeInInput = (event) => {
-        const page = event.target.value ? Number(event.target.value) - 1 : 0;
-        gotoPage(page);
-    };
+    // const onChangeInInput = (event) => {
+    //     const page = event.target.value ? Number(event.target.value) - 1 : 0;
+    //     gotoPage(page);
+    // };
 
     return (
         <Fragment>
@@ -61,10 +67,10 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
                             <th {...column.getHeaderProps()}>
-                                <div {...column.getSortByToggleProps()}>
+                                {/*<div {...column.getSortByToggleProps()}>*/}
                                     {column.render('Header')}
                                     {/*{generateSortingIndicator(column)}*/}
-                                </div>
+                                {/*</div>*/}
                                 {/*<Filter column={column} />*/}
                             </th>
                         ))}
@@ -99,7 +105,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
             <Row style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
 
-                <Col md={2}>
+                <Col md={4}>
                     <CustomInput
                         type='select'
                         value={pageSize}
@@ -115,24 +121,24 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                 </Col>
 
 
-                <Col md={2} style={{ marginTop: 7 }}>
+                <Col md={3} style={{ marginTop: 7 }}>
                     Page{' '}
                     <strong>
                         {pageIndex + 1} of {pageOptions.length}
                     </strong>
                 </Col>
-                <Col md={2}>
-                    <Input
-                        type='number'
-                        min={1}
-                        style={{ width: 70 }}
-                        max={pageOptions.length}
-                        defaultValue={pageIndex + 1}
-                        onChange={onChangeInInput}
-                    />
-                </Col>
+                {/*<Col md={4}>*/}
+                {/*    <Input*/}
+                {/*        type='number'*/}
+                {/*        min={1}*/}
+                {/*        style={{ width: 70 }}*/}
+                {/*        max={pageOptions.length}*/}
+                {/*        defaultValue={pageIndex + 1}*/}
+                {/*        onChange={onChangeInInput}*/}
+                {/*    />*/}
+                {/*</Col>*/}
 
-                <Col md={3}>
+                <Col md={5}>
                     <Button
                         color='primary'
                         onClick={() => gotoPage(0)}
@@ -147,9 +153,6 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                     >
                         {'<'}
                     </Button>
-                </Col>
-
-                <Col md={3}>
                     <Button color='primary' onClick={nextPage} disabled={!canNextPage}>
                         {'>'}
                     </Button>
@@ -161,6 +164,19 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                         {'>>'}
                     </Button>
                 </Col>
+
+                {/*<Col md={3}>*/}
+                {/*    <Button color='primary' onClick={nextPage} disabled={!canNextPage}>*/}
+                {/*        {'>'}*/}
+                {/*    </Button>*/}
+                {/*    <Button*/}
+                {/*        color='primary'*/}
+                {/*        onClick={() => gotoPage(pageCount - 1)}*/}
+                {/*        disabled={!canNextPage}*/}
+                {/*    >*/}
+                {/*        {'>>'}*/}
+                {/*    </Button>*/}
+                {/*</Col>*/}
             </Row>
         </Fragment>
     );
