@@ -10,6 +10,7 @@ import {
 import TableContainer from './TableContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import {messages} from "./Messages/messages";
 // import { SelectColumnFilter } from './filters';
 
 const App = () => {
@@ -68,18 +69,18 @@ const App = () => {
           //       ),
           //   },
             {
-                Header: 'Title',
+                Header: messages.title,
                 accessor: 'name.title',
                 disableSortBy: true,
                 // Filter: SelectColumnFilter,
                 // filter: 'equals',
             },
             {
-                Header: 'First Name',
+                Header: messages.firstName,
                 accessor: 'name.first',
             },
             {
-                Header: 'Last Name',
+                Header: messages.lastName,
                 accessor: 'name.last',
             },
             {
@@ -87,7 +88,7 @@ const App = () => {
                 accessor: 'email',
             },
             {
-                Header: 'City',
+                Header: messages.city,
                 accessor: 'location.city',
             }
             // {

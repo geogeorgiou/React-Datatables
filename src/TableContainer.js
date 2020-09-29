@@ -6,6 +6,7 @@ import {
     useExpanded,
     usePagination,
 } from 'react-table';
+import {messages} from "./Messages/messages";
 
 import {
     Table,
@@ -114,7 +115,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                         >
                         {[10, 20, 30, 40, 50].map((pageSize) => (
                             <option key={pageSize} value={pageSize}>
-                                Show {pageSize}
+                                {messages.dashboardTotalRecords} {pageSize}
                             </option>
                         ))}
                     </CustomInput>
@@ -122,9 +123,9 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
 
                 <Col md={3} style={{ marginTop: 7 }}>
-                    Page{' '}
+                    {messages.dashboardPageText}{' '}
                     <strong>
-                        {pageIndex + 1} of {pageOptions.length}
+                        {pageIndex + 1} {messages.dashboardPageFrom} {pageOptions.length}
                     </strong>
                 </Col>
                 {/*<Col md={4}>*/}
