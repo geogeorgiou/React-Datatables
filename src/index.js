@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './styles/css/custom-btsp.scss'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

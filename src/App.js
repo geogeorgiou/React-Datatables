@@ -8,7 +8,7 @@ import {
     // CardTitle,
 } from 'reactstrap';
 import TableContainer from './TableContainer';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import {messages} from "./Messages/messages";
 // import { SelectColumnFilter } from './filters';

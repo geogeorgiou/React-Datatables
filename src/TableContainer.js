@@ -143,6 +143,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                 {/*</Col>*/}
 
                 <Col md={5}>
+                    {/*<div class="btn btn-primary" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</div>*/}
                     <Button
                         color='primary'
                         onClick={() => gotoPage(0)}
