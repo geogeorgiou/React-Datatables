@@ -53,6 +53,9 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
     const onChangeInSelect = (event) => {
         setPageSize(Number(event.target.value));
+
+        //Go To Page 0 after changing PageSize
+        gotoPage(0);
     };
 
     // const onChangeInInput = (event) => {
