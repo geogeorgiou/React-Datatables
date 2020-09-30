@@ -81,7 +81,7 @@ const DashboardNavbar = (props) => {
                     <NavbarText>Simple Text</NavbarText>
 
                     <Badge color="secondary">
-                        <NotificationsIcon/>
+                        <NotificationsIcon />
                     </Badge>
 
                     <Badge color="secondary">
