@@ -17,6 +17,11 @@ import {
     CustomInput } from 'reactstrap';
 // import { Filter, DefaultColumnFilter } from './filters';
 
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
 const TableContainer = ({ columns, data, renderRowSubComponent }) => {
     const {
         getTableProps,
@@ -65,7 +70,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
     return (
         <Fragment>
-            <Table bordered hover {...getTableProps()}>
+            <Table bordered responsive hover {...getTableProps()}>
                 <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -149,24 +154,24 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                         onClick={() => gotoPage(0)}
                         disabled={!canPreviousPage}
                     >
-                        {'<<'}
+                        <FirstPageIcon/>
                     </Button>
                     <Button
                         color='primary'
                         onClick={previousPage}
                         disabled={!canPreviousPage}
                     >
-                        {'<'}
+                        <ChevronLeftIcon/>
                     </Button>
                     <Button color='primary' onClick={nextPage} disabled={!canNextPage}>
-                        {'>'}
+                        <ChevronRightIcon/>
                     </Button>
                     <Button
                         color='primary'
                         onClick={() => gotoPage(pageCount - 1)}
                         disabled={!canNextPage}
                     >
-                        {'>>'}
+                        <LastPageIcon/>
                     </Button>
                 </Col>
 
