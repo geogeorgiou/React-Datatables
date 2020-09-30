@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import Aux from './hoc/Auxiliary/Auxiliary'
+import DashboardNavbar from "./components/Dashboard/Navbar/DashboardNavbar";
+import DashboardFilterNavbar from  './components/Dashboard/Navbar/DashboardFilterNavbar'
 import {
     Container,
     // Card,
@@ -126,13 +129,18 @@ const App = () => {
     );
 
     return (
-        <Container style={{ marginTop: 100 }}>
-            <TableContainer
-                columns={columns}
-                data={data}
-                // renderRowSubComponent={renderRowSubComponent}
-            />
-        </Container>
+        <Aux>
+            <DashboardNavbar/>
+            <DashboardFilterNavbar/>
+            <Container style={{ marginTop: 100 }}>
+                <TableContainer
+                    columns={columns}
+                    data={data}
+                    // renderRowSubComponent={renderRowSubComponent}
+                />
+            </Container>
+        </Aux>
+
     );
 };
 

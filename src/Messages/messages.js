@@ -12,7 +12,9 @@ export const messages = {
     //dashboard controls
     dashboardPageText: 'Αρ. Σελίδας',
     dashboardPageFrom: 'από',
-    dashboardTotalRecords: 'Αριθμός Εγγραφών'
+    dashboardTotalRecords: 'Αριθμός Εγγραφών',
+    dashboardVat: 'ΑΦΜ',
+    dashboardNewRequest: 'Νέο Αίτημα'
 
 }
 
