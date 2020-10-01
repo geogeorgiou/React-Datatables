@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {Component} from 'react';
 import {
     Collapse,
     Navbar,
@@ -12,10 +12,6 @@ import {
     DropdownMenu,
     DropdownItem,
     NavbarText,
-    Input,
-    InputGroup,
-    InputGroupAddon,
-    InputGroupText,
     Button,
     Badge
 } from 'reactstrap';
@@ -25,72 +21,89 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import PersonIcon from '@material-ui/icons/Person';
 
 import {messages} from "../../../Messages/messages";
-// import Input from "@material-ui/core/Input";
+import NewRequestModal from "../../Modal/NewRequestModal";
 
-const DashboardNavbar = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
+class DashboardNavbar extends Component{
 
-    const toggle = () => setIsOpen(!isOpen);
+    state = {
+        isNavbarOpen: false,
+        newRequestModalShow : false
+    }
 
-    return (
-        <div>
-            <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">reactstrap</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/components/">Components</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                        </NavItem>
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Options
-                            </DropdownToggle>
-                            <DropdownMenu right>
-                                <DropdownItem>
-                                    Option 1
-                                </DropdownItem>
-                                <DropdownItem>
-                                    Option 2
-                                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Reset
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
+    toggleNavbarMenu = () => {
+        this.setState({isNavbarOpen: !this.state.isNavbarOpen});
+    }
 
+    newRequestModalToggler = () => {
+        this.setState({newRequestModalShow: !this.state.newRequestModalShow});
+    }
 
+    render() {
+        return (
+            <div>
+                <Navbar color="light" light expand="md">
+                    <NavbarBrand href="/">reactstrap</NavbarBrand>
+                    <NavbarToggler onClick={() => this.toggleNavbarMenu()}/>
+                    <Collapse isOpen={this.state.isNavbarOpen} navbar>
+                        <Nav className="mr-auto" navbar>
+                            <NavItem>
+                                <NavLink href="/components/">Components</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                            </NavItem>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    Options
+                                </DropdownToggle>
+                                <DropdownMenu right>
+                                    <DropdownItem>
+                                        Option 1
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Option 2
+                                    </DropdownItem>
+                                    <DropdownItem divider/>
+                                    <DropdownItem>
+                                        Reset
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
 
-                    </Nav>
+                            {/*<NavItem>*/}
+                            {/*    <Button>Why hello</Button>*/}
+                            {/*</NavItem>*/}
 
-                    {/*<InputGroup>*/}
-                    {/*    <InputGroupAddon addonType="prepend">*/}
-                    {/*        <InputGroupText >{messages.dashboardVat}</InputGroupText>*/}
-                    {/*    </InputGroupAddon>*/}
-                    {/*    <Input placeholder="username" disabled/>*/}
-                    {/*</InputGroup>*/}
+                        </Nav>
 
-                    <Button color="primary" size="lg">
-                        <AddIcon className="mb-1" /> {messages.dashboardNewRequest}
-                    </Button>
+                        {/*<InputGroup>*/}
+                        {/*    <InputGroupAddon addonType="prepend">*/}
+                        {/*        <InputGroupText >{messages.dashboardVat}</InputGroupText>*/}
+                        {/*    </InputGroupAddon>*/}
+                        {/*    <Input placeholder="username" disabled/>*/}
+                        {/*</InputGroup>*/}
 
-                    <NavbarText>Simple Text</NavbarText>
+                        <Button color="primary" size="lg" onClick={() => this.newRequestModalToggler()}>
+                            <AddIcon className="mb-1"/> {messages.dashboardNewRequest}
+                        </Button>
 
-                    <Badge color="secondary">
-                        <NotificationsIcon />
-                    </Badge>
+                        <NavbarText>Simple Text</NavbarText>
 
-                    <Badge color="secondary">
-                        <PersonIcon/>
-                    </Badge>
-                </Collapse>
-            </Navbar>
-        </div>
-    );
+                        <Badge color="secondary">
+                            <NotificationsIcon/>
+                        </Badge>
+
+                        <Badge color="secondary">
+                            <PersonIcon/>
+                        </Badge>
+                    </Collapse>
+                </Navbar>
+
+                <NewRequestModal show={this.state.newRequestModalShow} onHide={this.newRequestModalToggler} modalBackdrop={true} modalKeyboard={false}/>
+            </div>
+        );
+    }
+
 }
 
 export default DashboardNavbar;

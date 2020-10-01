@@ -1,27 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Navbar, Nav, NavItem, NavLink } from 'reactstrap';
 
-const DashboardFilterNavbar = (props) => {
-    return (
-        <div>
-            <Navbar>
-                <Nav>
-                    <NavItem>
-                        <NavLink href="#">Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">Another Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink disabled href="#">Disabled Link</NavLink>
-                    </NavItem>
-                </Nav>
-            </Navbar>
-        </div>
-    );
+class DashboardFilterNavbar extends Component {
+
+    render() {
+        return (
+            <div>
+                <Navbar>
+                    <Nav>
+                        <NavItem>
+                            <NavLink href="#">Link</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#">Link</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#">Another Link</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink disabled href="#">Disabled Link</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Navbar>
+            </div>
+        );
+    }
+
 }
 
 export default DashboardFilterNavbar;
