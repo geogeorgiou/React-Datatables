@@ -31,11 +31,17 @@ class DashboardNavbar extends Component{
     }
 
     toggleNavbarMenu = () => {
-        this.setState({isNavbarOpen: !this.state.isNavbarOpen});
+        this.setState(prevState => {
+            return {
+                isNavbarOpen: !prevState.isNavbarOpen
+            }
+        });
     }
 
     newRequestModalToggler = () => {
-        this.setState({newRequestModalShow: !this.state.newRequestModalShow});
+        this.setState(prevState => {
+            return {newRequestModalShow: !prevState.newRequestModalShow}
+        });
     }
 
 

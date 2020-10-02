@@ -23,11 +23,19 @@ class NewRequestModal extends Component {
     // }
 
     setBackdrop = () => {
-        this.setState({backdrop: !this.state.backdrop});
+        this.setState(prevState => {
+          return {
+              backdrop: !prevState.backdrop
+          }
+        });
     }
 
     setKeyboard = () => {
-        this.setState({keyboard: !this.state.keyboard});
+        this.setState(prevState => {
+            return {
+                keyboard: !prevState.keyboard
+            }
+        });
     }
 
     changeBackdrop = (e) => {
