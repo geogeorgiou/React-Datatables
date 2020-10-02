@@ -6,7 +6,7 @@ import {
     useExpanded,
     usePagination,
 } from 'react-table';
-import {messages} from "./Messages/messages";
+import {messages} from "./messages/messages";
 
 import {
     Table,
@@ -116,6 +116,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
                 <Col md={4}>
                     <CustomInput
+                        id='0'
                         type='select'
                         value={pageSize}
                         onChange={onChangeInSelect}
@@ -150,24 +151,24 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                 <Col md={5}>
                     {/*<div class="btn btn-primary" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</div>*/}
                     <Button
-                        color='primary'
+                        color='light'
                         onClick={() => gotoPage(0)}
                         disabled={!canPreviousPage}
                     >
                         <FirstPageIcon/>
                     </Button>
                     <Button
-                        color='primary'
+                        color='light'
                         onClick={previousPage}
                         disabled={!canPreviousPage}
                     >
                         <ChevronLeftIcon/>
                     </Button>
-                    <Button color='primary' onClick={nextPage} disabled={!canNextPage}>
+                    <Button color='light' onClick={nextPage} disabled={!canNextPage}>
                         <ChevronRightIcon/>
                     </Button>
                     <Button
-                        color='primary'
+                        color='light'
                         onClick={() => gotoPage(pageCount - 1)}
                         disabled={!canNextPage}
                     >

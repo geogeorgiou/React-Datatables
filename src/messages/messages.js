@@ -14,8 +14,16 @@ export const messages = {
     dashboardPageFrom: 'από',
     dashboardTotalRecords: 'Αριθμός Εγγραφών',
     dashboardVat: 'ΑΦΜ',
-    dashboardNewRequest: 'Νέο Αίτημα'
+    dashboardNewRequest: 'Νέο Αίτημα',
 
+    validation : {
+
+        required: 'Υπολοίπονται στοιχεία!',
+
+        password : {
+            length: 'Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες'
+        }
+    }
 }
 
 

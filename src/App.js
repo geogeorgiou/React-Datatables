@@ -13,24 +13,17 @@ import {
 import TableContainer from './TableContainer';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import {messages} from "./Messages/messages";
+import {messages} from "./messages/messages";
 // import { SelectColumnFilter } from './filters';
 
 const App = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        // const doFetch = async () => {
-        //     const response = await fetch('https://randomuser.me/api/?results=100');
-        //     const body = await response.json();
-        //     const contacts = body.results;
-        //     console.log(contacts);
-        //     setData(contacts);
-        // };
         const doFetch = async () => {
             const response = await axios.get('https://randomuser.me/api/?results=100');
             const body = await response.data;
             const contacts = body.results;
-            console.log(contacts);
+            // console.log(contacts);
             setData(contacts);
         };
         doFetch();

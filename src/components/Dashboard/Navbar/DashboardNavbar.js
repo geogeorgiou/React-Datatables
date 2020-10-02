@@ -20,7 +20,7 @@ import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PersonIcon from '@material-ui/icons/Person';
 
-import {messages} from "../../../Messages/messages";
+import {messages} from "../../../messages/messages";
 import NewRequestModal from "../../Modal/NewRequestModal";
 
 class DashboardNavbar extends Component{
@@ -37,6 +37,7 @@ class DashboardNavbar extends Component{
     newRequestModalToggler = () => {
         this.setState({newRequestModalShow: !this.state.newRequestModalShow});
     }
+
 
     render() {
         return (
