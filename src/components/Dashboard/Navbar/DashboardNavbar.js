@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
     Collapse,
     Navbar,
-    NavbarToggler,
     NavbarBrand,
     Nav,
     NavItem,
@@ -11,31 +10,28 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText,
     Button,
-    Badge
+    Badge,
 } from 'reactstrap';
+
+import DrawerNavbar from "./DrawerNavbar";
+import NewRequestModal from "../../Modal/NewRequestModal";
 
 import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PersonIcon from '@material-ui/icons/Person';
 
+
 import {messages} from "../../../messages/messages";
-import NewRequestModal from "../../Modal/NewRequestModal";
+
+
+
 
 class DashboardNavbar extends Component{
 
     state = {
-        isNavbarOpen: false,
+        isSidebarOpen: false,
         newRequestModalShow : false
-    }
-
-    toggleNavbarMenu = () => {
-        this.setState(prevState => {
-            return {
-                isNavbarOpen: !prevState.isNavbarOpen
-            }
-        });
     }
 
     newRequestModalToggler = () => {
@@ -48,10 +44,14 @@ class DashboardNavbar extends Component{
     render() {
         return (
             <div>
+
                 <Navbar color="light" light expand="md">
+
+                    <DrawerNavbar />
+
                     <NavbarBrand href="/">reactstrap</NavbarBrand>
-                    <NavbarToggler onClick={() => this.toggleNavbarMenu()}/>
-                    <Collapse isOpen={this.state.isNavbarOpen} navbar>
+
+                    <Collapse isOpen={this.state.isSidebarOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <NavItem>
                                 <NavLink href="/components/">Components</NavLink>
@@ -94,7 +94,7 @@ class DashboardNavbar extends Component{
                             <AddIcon className="mb-1"/> {messages.dashboardNewRequest}
                         </Button>
 
-                        <NavbarText>Simple Text</NavbarText>
+                        {/*<NavbarText>Simple Text</NavbarText>*/}
 
                         <Badge color="secondary">
                             <NotificationsIcon/>

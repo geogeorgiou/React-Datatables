@@ -1,0 +1,21 @@
+
+.toggler{
+    display: block;
+}
+
+.list {
+    width: 250px;
+}
+
+.fullList {
+    width: auto;
+}
+
+/*CODE FIRST LOGIC SMALLEST TO BIGGEST RESOLUTIONS*/
+
+@media only screen and (min-width: 800px) {
+
+    .toggler{
+        display: none;
+    }
+}
