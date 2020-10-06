@@ -3,18 +3,13 @@ import Aux from './hoc/Auxiliary/Auxiliary'
 import DashboardNavbar from "./components/Dashboard/Navbar/DashboardNavbar";
 import DashboardFilterNavbar from  './components/Dashboard/Navbar/DashboardFilterNavbar'
 import {
-    Container,
-    // Card,
-    // CardImg,
-    // CardText,
-    // CardBody,
-    // CardTitle,
+    Container
 } from 'reactstrap';
 import TableContainer from './TableContainer';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+
+import clsx from "clsx";
 import {messages} from "./messages/messages";
-// import { SelectColumnFilter } from './filters';
 
 const App = () => {
     const [data, setData] = useState([]);
@@ -29,47 +24,36 @@ const App = () => {
         doFetch();
     }, []);
 
-    // const renderRowSubComponent = (row) => {
-    //     const {
-    //         name: { first, last },
-    //         location: { city, street, postcode },
-    //         picture,
-    //         cell,
-    //     } = row.original;
-    //     return (
-    //         <Card style={{ width: '18rem', margin: '0 auto' }}>
-    //             <CardImg top src={picture.large} alt='Card image cap' />
-    //             <CardBody>
-    //                 <CardTitle>
-    //                     <strong>{`${first} ${last}`} </strong>
-    //                 </CardTitle>
-    //                 <CardText>
-    //                     <strong>Phone</strong>: {cell} <br />
-    //                     <strong>Address:</strong>{' '}
-    //                     {`${street.name} ${street.number} - ${postcode} - ${city}`}
-    //                 </CardText>
-    //             </CardBody>
-    //         </Card>
-    //     );
-    // };
 
     const columns = useMemo(
         () => [
-          //   {
-          //       Header: () => null,
-          //       id: 'expander', // 'id' is required
-          //       Cell: ({ row }) => (
-          //           <span {...row.getToggleRowExpandedProps()}>
-          //   {row.isExpanded ? '👇' : '👉'}
-          // </span>
-          //       ),
-          //   },
             {
                 Header: messages.title,
                 accessor: 'name.title',
                 disableSortBy: true,
                 // Filter: SelectColumnFilter,
                 // filter: 'equals',
+                Cell: ({ cell }) => {
+                    const { value } = cell;
+
+                    const getTitleStyles = (value) => {
+
+                        let titleStyles;
+                        if (value === 'Mr'){
+                            titleStyles = 'alert-primary';
+                        }
+                        else{
+                            titleStyles = 'alert-danger';
+                        }
+                        return titleStyles;
+                    }
+
+                    return (
+                        <div className={clsx('alert', getTitleStyles(value))} style={{ textAlign: 'center'}}>
+                            { value }
+                        </div>
+                    );
+                }
             },
             {
                 Header: messages.firstName,
@@ -87,36 +71,6 @@ const App = () => {
                 Header: messages.city,
                 accessor: 'location.city',
             }
-            // {
-            //     Header: 'Hemisphere',
-            //     accessor: (values) => {
-            //         const { latitude, longitude } = values.location.coordinates;
-            //         const first = Number(latitude) > 0 ? 'N' : 'S';
-            //         const second = Number(longitude) > 0 ? 'E' : 'W';
-            //         return first + '/' + second;
-            //     },
-            //     disableSortBy: true,
-            //     Filter: SelectColumnFilter,
-            //     filter: 'equals',
-            //     Cell: ({ cell }) => {
-            //         const { value } = cell;
-            //
-            //         const pickEmoji = (value) => {
-            //             let first = value[0]; // N or S
-            //             let second = value[2]; // E or W
-            //             const options = ['⇖', '⇗', '⇙', '⇘'];
-            //             let num = first === 'N' ? 0 : 2;
-            //             num = second === 'E' ? num + 1 : num;
-            //             return options[num];
-            //         };
-            //
-            //         return (
-            //             <div style={{ textAlign: 'center', fontSize: 18 }}>
-            //                 {pickEmoji(value)}
-            //             </div>
-            //         );
-            //     },
-            // },
         ],
         []
     );
