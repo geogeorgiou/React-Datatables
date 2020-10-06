@@ -6,6 +6,7 @@ import {
     Container
 } from 'reactstrap';
 import TableContainer from './TableContainer';
+import Loader from './components/UI/Loader/Loader'
 import axios from 'axios';
 
 import clsx from "clsx";
@@ -13,15 +14,22 @@ import {messages} from "./messages/messages";
 
 const App = () => {
     const [data, setData] = useState([]);
+    // const [loading,setLoading] = useState(true);
     useEffect(() => {
         const doFetch = async () => {
-            const response = await axios.get('https://randomuser.me/api/?results=100');
+            // const response = await axios.get('https://randomuser.me/api/?results=100');
+            const response = await axios.get('https://randomuser.me/api/?results=15');
             const body = await response.data;
             const contacts = body.results;
             // console.log(contacts);
             setData(contacts);
         };
-        doFetch();
+        doFetch()
+            // .then(() => setLoading(true))
+            // .catch(err => {
+            //     setLoading(false);
+            // console.log(err)
+        // });
     }, []);
 
 
@@ -79,10 +87,12 @@ const App = () => {
         <Aux>
             <DashboardNavbar/>
             <DashboardFilterNavbar/>
-            <Container style={{ marginTop: 100 }}>
+            <Container style={{ marginTop: '1rem' }}>
                 <TableContainer
                     columns={columns}
                     data={data}
+                    // loading={loading}
+                    // LoadingComponent={Loader}
                     // renderRowSubComponent={renderRowSubComponent}
                 />
             </Container>

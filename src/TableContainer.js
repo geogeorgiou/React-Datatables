@@ -1,22 +1,9 @@
-import React, { Fragment } from 'react';
-import {
-    useTable,
-    // useSortBy,
-    useFilters,
-    useExpanded,
-    usePagination,
-} from 'react-table';
+import React, {Fragment, useEffect} from 'react';
+import {useExpanded, useFilters, usePagination, useTable,} from 'react-table';
 import {messages} from "./messages/messages";
 
-import {
-    Table,
-    Row,
-    Col,
-    Button,
-    // Input,
-    CustomInput } from 'reactstrap';
+import {Button, Col, CustomInput, Row, Table} from 'reactstrap';
 // import { Filter, DefaultColumnFilter } from './filters';
-
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -52,6 +39,10 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
         usePagination
     );
 
+    // useEffect(() => {
+    //     console.log(nextPage)
+    // })
+
     // const generateSortingIndicator = (column) => {
     //     return column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : '';
     // };
@@ -68,9 +59,16 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
     //     gotoPage(page);
     // };
 
+    // useEffect(() => {
+    //     if (pageCount === 0){
+    //         console.log(true)
+    //     }
+    //     console.log(pageCount)
+    // })
+
     return (
         <Fragment>
-            <Table bordered responsive hover {...getTableProps()}>
+            <Table bordered responsive hover {...getTableProps()} >
                 <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -110,6 +108,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                     );
                 })}
                 </tbody>
+
             </Table>
 
             <Row style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>

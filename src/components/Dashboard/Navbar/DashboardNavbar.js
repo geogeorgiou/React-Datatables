@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import {
+    Badge,
     Collapse,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Nav,
     Navbar,
     NavbarBrand,
-    Nav,
     NavItem,
     NavLink,
     UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    Button,
-    Badge,
 } from 'reactstrap';
 
 import DrawerNavbar from "./DrawerNavbar";
 import NewRequestModal from "../../Modal/NewRequestModal";
+import CustomButton from "../../UI/Buttons/CustomButton";
 
 import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -23,8 +23,6 @@ import PersonIcon from '@material-ui/icons/Person';
 
 
 import {messages} from "../../../messages/messages";
-
-
 
 
 class DashboardNavbar extends Component{
@@ -90,9 +88,17 @@ class DashboardNavbar extends Component{
                         {/*    <Input placeholder="username" disabled/>*/}
                         {/*</InputGroup>*/}
 
-                        <Button color="primary" size="lg" onClick={() => this.newRequestModalToggler()}>
+                        {/*<Button color="primary" size="lg" onClick={() => this.newRequestModalToggler()}>*/}
+                        {/*    <AddIcon className="mb-1"/> {messages.dashboardNewRequest}*/}
+                        {/*</Button>*/}
+
+                        <CustomButton size="lg" onClick={() => this.newRequestModalToggler()}>
                             <AddIcon className="mb-1"/> {messages.dashboardNewRequest}
-                        </Button>
+                        </CustomButton>
+
+                        {/*<CustomButton btntype="dash-primary" size="lg" onClick={() => this.newRequestModalToggler()}>*/}
+                        {/*    <AddIcon className="mb-1"/> {messages.dashboardNewRequest}*/}
+                        {/*</CustomButton>*/}
 
                         {/*<NavbarText>Simple Text</NavbarText>*/}
 

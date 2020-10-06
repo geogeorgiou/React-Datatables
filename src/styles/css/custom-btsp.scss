@@ -4,9 +4,13 @@ $theme-colors: (
         "success": #00703c,
         "warning": #C25400,
         "danger": #CB3131,
-        "light": #FAFAFA
+        "light": #FAFAFA,
+        "info": #046EC5
 );
 
 $btn-border-radius: 6px;
+//$btn-box-shadow: none !default;
+//$btn-active-box-shadow: none !default;
+//$btn-box-shadow: none !default;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";

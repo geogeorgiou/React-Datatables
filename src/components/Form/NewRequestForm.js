@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import {Form, Label, FormGroup, Input, Button } from 'reactstrap';
 import {validateFields} from "./Validator/ValidateFields";
+import CustomButton from '../UI/Buttons/CustomButton';
 
-import classnames from 'classnames';
+// import clsx from 'clsx';
+import clsx from "clsx";
 // import {messages} from "../../messages/messages";
 
 import CloseIcon from '@material-ui/icons/Close';
@@ -134,7 +136,7 @@ class NewRequestForm extends Component{
                         value={this.state.email.value}
                         autoComplete="on"
                         placeholder="Enter your email"
-                        className={classnames(
+                        className={clsx(
                             'form-control',
                             { 'is-valid': this.state.email.error === false },
                             { 'is-invalid': this.state.email.error }
@@ -160,7 +162,7 @@ class NewRequestForm extends Component{
                         value={this.state.password.value}
                         autoComplete="on"
                         placeholder="Enter your password"
-                        className={classnames(
+                        className={clsx(
                             'form-control',
                             { 'is-valid': this.state.password.error === false },
                             { 'is-invalid': this.state.password.error }
@@ -178,17 +180,30 @@ class NewRequestForm extends Component{
 
                 <FormGroup className="d-flex justify-content-between">
 
-                    <Button onClick={this.props.hideModal}>
-                        <CloseIcon/>
-                    </Button>
+                    {/*<Button onClick={this.props.hideModal}>*/}
+                    {/*    <CloseIcon/>*/}
+                    {/*</Button>*/}
 
-                    <Button
+                    {/*<Button*/}
+                    {/*    type="submit"*/}
+                    {/*    className="btn btn-outline-primary"*/}
+                    {/*    onMouseDown={() => this.setState({ submitCalled: true })}*/}
+                    {/*>*/}
+                    {/*    Submit*/}
+                    {/*</Button>*/}
+
+                    <CustomButton
+                        btntype="cancel"
+                        onClick={this.props.hideModal}>
+                        <CloseIcon/>
+                    </CustomButton>
+
+                    <CustomButton
+                        btntype="confirm"
                         type="submit"
-                        className="btn btn-outline-primary"
-                        onMouseDown={() => this.setState({ submitCalled: true })}
-                    >
+                        onMouseDown={() => this.setState({ submitCalled: true })}>
                         Submit
-                    </Button>
+                    </CustomButton>
                 </FormGroup>
 
 
