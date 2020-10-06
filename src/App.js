@@ -6,7 +6,6 @@ import {
     Container
 } from 'reactstrap';
 import TableContainer from './TableContainer';
-import Loader from './components/UI/Loader/Loader'
 import axios from 'axios';
 
 import clsx from "clsx";
@@ -14,7 +13,7 @@ import {messages} from "./messages/messages";
 
 const App = () => {
     const [data, setData] = useState([]);
-    // const [loading,setLoading] = useState(true);
+    const [loading,setLoading] = useState(true);
     useEffect(() => {
         const doFetch = async () => {
             // const response = await axios.get('https://randomuser.me/api/?results=100');
@@ -25,7 +24,11 @@ const App = () => {
             setData(contacts);
         };
         doFetch()
-            // .then(() => setLoading(true))
+            .then(() => {
+                setTimeout(function() { //Start the timer
+                    setLoading(false) //After 2 second, set render to true
+                }, 2000)
+            })
             // .catch(err => {
             //     setLoading(false);
             // console.log(err)
@@ -91,8 +94,7 @@ const App = () => {
                 <TableContainer
                     columns={columns}
                     data={data}
-                    // loading={loading}
-                    // LoadingComponent={Loader}
+                    isLoading={loading}
                     // renderRowSubComponent={renderRowSubComponent}
                 />
             </Container>

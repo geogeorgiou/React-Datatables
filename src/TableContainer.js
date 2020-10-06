@@ -1,5 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {useExpanded, useFilters, usePagination, useTable,} from 'react-table';
+import Loader from './components/UI/Loader/Loader'
+
 import {messages} from "./messages/messages";
 
 import {Button, Col, CustomInput, Row, Table} from 'reactstrap';
@@ -9,7 +11,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-const TableContainer = ({ columns, data, renderRowSubComponent }) => {
+const TableContainer = ({ columns, data, isLoading, renderRowSubComponent }) => {
     const {
         getTableProps,
         getTableBodyProps,
@@ -68,7 +70,9 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
     return (
         <Fragment>
+
             <Table bordered responsive hover {...getTableProps()} >
+
                 <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -85,29 +89,33 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                 ))}
                 </thead>
 
-                <tbody {...getTableBodyProps()}>
-                {page.map((row) => {
-                    prepareRow(row);
-                    return (
-                        <Fragment key={row.getRowProps().key}>
-                            <tr>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                    );
-                                })}
-                            </tr>
-                            {row.isExpanded && (
+                {isLoading ?
+                    <Loader loading={isLoading}/>
+                    :
+                    <tbody {...getTableBodyProps()}>
+                    {page.map((row) => {
+                        prepareRow(row);
+                        return (
+                            <Fragment key={row.getRowProps().key}>
                                 <tr>
-                                    <td colSpan={visibleColumns.length}>
-                                        {renderRowSubComponent(row)}
-                                    </td>
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        );
+                                    })}
                                 </tr>
-                            )}
-                        </Fragment>
-                    );
-                })}
-                </tbody>
+                                {row.isExpanded && (
+                                    <tr>
+                                        <td colSpan={visibleColumns.length}>
+                                            {renderRowSubComponent(row)}
+                                        </td>
+                                    </tr>
+                                )}
+                            </Fragment>
+                        );
+                    })}
+                    </tbody>}
+
 
             </Table>
 
