@@ -14,6 +14,8 @@ import {messages} from "./messages/messages";
 const App = () => {
     const [data, setData] = useState([]);
     const [loading,setLoading] = useState(true);
+    const [error, setError] = useState(true);
+
     useEffect(() => {
         const doFetch = async () => {
             // const response = await axios.get('https://randomuser.me/api/?results=100');
@@ -26,15 +28,15 @@ const App = () => {
         doFetch()
             .then(() => {
                 setTimeout(function() { //Start the timer
-                    setLoading(false) //After 2 second, set render to true
+                    setLoading(false); //After 2 second, set render to true
+                    setError(false);
                 }, 2000)
             })
-            // .catch(err => {
-            //     setLoading(false);
-            // console.log(err)
-        // });
+            .catch(err => {
+                setLoading(false);
+                setError(true);
+        });
     }, []);
-
 
     const columns = useMemo(
         () => [
@@ -95,6 +97,11 @@ const App = () => {
                     columns={columns}
                     data={data}
                     isLoading={loading}
+                    isError={error}
+                    noDataText={messages.dashboard.noDataText}
+                    noFilteredDataText={messages.dashboard.noFilteredDataText}
+                    manual // informs React Table that you'll be handling sorting and pagination server-side
+
                     // renderRowSubComponent={renderRowSubComponent}
                 />
             </Container>

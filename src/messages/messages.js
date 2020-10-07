@@ -10,11 +10,16 @@ export const messages = {
     city: 'Πόλη',
 
     //dashboard controls
-    dashboardPageText: 'Αρ. Σελίδας',
-    dashboardPageFrom: 'από',
-    dashboardTotalRecords: 'Αριθμός Εγγραφών',
-    dashboardVat: 'ΑΦΜ',
-    dashboardNewRequest: 'Νέο Αίτημα',
+    dashboard: {
+
+        pageText: 'Αρ. Σελίδας',
+        pageFrom: 'από',
+        totalRecords: 'Αριθμός Εγγραφών',
+        vat: 'ΑΦΜ',
+        newRequest: 'Νέο Αίτημα',
+        noDataText: 'Δεν βρέθηκαν εγγραφές',
+        noFilteredDataText: 'Δεν βρέθηκαν εγγραφές με αυτά τα κριτήρια αναζήτησης'
+    },
 
     validation : {
 

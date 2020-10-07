@@ -1,12 +1,11 @@
 import React, {Component} from "react";
-import {Form, Label, FormGroup, Input, Button } from 'reactstrap';
+import {Form, FormGroup, Input, Label} from 'reactstrap';
 import {validateFields} from "./Validator/ValidateFields";
 import CustomButton from '../UI/Buttons/CustomButton';
 
 // import clsx from 'clsx';
 import clsx from "clsx";
 // import {messages} from "../../messages/messages";
-
 import CloseIcon from '@material-ui/icons/Close';
 
 
