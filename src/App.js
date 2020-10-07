@@ -2,9 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import Aux from './hoc/Auxiliary/Auxiliary'
 import DashboardNavbar from "./components/Dashboard/Navbar/DashboardNavbar";
 import DashboardFilterNavbar from  './components/Dashboard/Navbar/DashboardFilterNavbar'
-import {
-    Container
-} from 'reactstrap';
+import { Container } from 'reactstrap';
 import TableContainer from './TableContainer';
 import axios from 'axios';
 
@@ -14,17 +12,22 @@ import {messages} from "./messages/messages";
 const App = () => {
     const [data, setData] = useState([]);
     const [loading,setLoading] = useState(true);
-    const [error, setError] = useState(true);
+    const [error, setError] = useState(false);
+    const [pageCount, setPageCount] = useState(10); //TODO NEED TO SET THIS
+
+    const doFetch = async () => {
+        // const response = await axios.get('https://randomuser.me/api/?results=100');
+        const response = await axios.get('https://randomuser.me/api/?results=15');
+        const body = await response.data;
+        const contacts = body.results;
+        // console.log(contacts);
+        setData(contacts);
+    }
 
     useEffect(() => {
-        const doFetch = async () => {
-            // const response = await axios.get('https://randomuser.me/api/?results=100');
-            const response = await axios.get('https://randomuser.me/api/?results=15');
-            const body = await response.data;
-            const contacts = body.results;
-            // console.log(contacts);
-            setData(contacts);
-        };
+        // const doFetch = async () => {
+        //     await fetchMethod();
+        // };
         doFetch()
             .then(() => {
                 setTimeout(function() { //Start the timer
@@ -35,7 +38,7 @@ const App = () => {
             .catch(err => {
                 setLoading(false);
                 setError(true);
-        });
+            });
     }, []);
 
     const columns = useMemo(
@@ -96,12 +99,12 @@ const App = () => {
                 <TableContainer
                     columns={columns}
                     data={data}
+                    fetchData={doFetch}
+                    pageCount={pageCount}
                     isLoading={loading}
                     isError={error}
                     noDataText={messages.dashboard.noDataText}
                     noFilteredDataText={messages.dashboard.noFilteredDataText}
-                    manual // informs React Table that you'll be handling sorting and pagination server-side
-
                     // renderRowSubComponent={renderRowSubComponent}
                 />
             </Container>

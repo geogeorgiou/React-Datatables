@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {useExpanded, useFilters, usePagination, useTable,} from 'react-table';
+import {useTable, usePagination} from 'react-table';
 import Loader from './components/UI/Loader/Loader'
 
 import {messages} from "./messages/messages";
@@ -10,13 +10,32 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import axios from "axios";
 
-const TableContainer = ({columns, data, isLoading, isError, noDataText, noFilteredDataText, renderRowSubComponent}) => {
+// fetchData method to our Table component that will be used to fetch
+// new data when pagination occurs
+// Add isLoading & isError state to let our table know it's loading new data or Error
+
+const TableContainer = ({
+                            columns,
+                            data,
+                            fetchData,
+                            isLoading,
+                            isError,
+                            pageCount: controlledPageCount,
+                            noDataText,
+                            noFilteredDataText,
+                            renderRowSubComponent
+                        }) => {
+
+    // Use the state and functions returned from useTable to handcraft your UI
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        page,
+        page, // Instead of using 'rows', use page (contains the rows for active page)
+
+        // THESE ARE LITERALLY SUGAR on react-table cake ;)
         prepareRow,
         visibleColumns,
         canPreviousPage,
@@ -27,24 +46,40 @@ const TableContainer = ({columns, data, isLoading, isError, noDataText, noFilter
         nextPage,
         previousPage,
         setPageSize,
+
+        // Get the state from the instance
         state: {pageIndex, pageSize},
     } = useTable(
         {
             columns,
             data,
-            // defaultColumn: { Filter: DefaultColumnFilter },
-            initialState: {pageIndex: 0, pageSize: 10},
+            // initialState: {pageIndex: 0, pageSize: 10},
+            initialState: {pageIndex: 0},
+            manualPagination: true,
+            pageCount: controlledPageCount,
         },
-        useFilters,
+        // useFilters,
         // useSortBy,
-        useExpanded,
+        // useExpanded,
         usePagination
     );
 
+
     // useEffect(() => {
-    //     console.log("ERROR " + isError);
-    //     console.log("LOADING " + isLoading);
-    // })
+    //     fetchData({ pageIndex, pageSize })
+    //         .then(() => {
+    //             // isError = false;
+    //         // setTimeout(function() { //Start the timer
+    //         //     setLoading(false); //After 2 second, set render to true
+    //         //     setError(false);
+    //         // }, 2000)
+    //     })
+    //         .catch(err => {
+    //             // setError(true);
+    //             // isLoading = false;
+    //             // isError = true;
+    //         });
+    // }, [fetchData, pageIndex, pageSize])
 
     // const generateSortingIndicator = (column) => {
     //     return column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : '';
@@ -54,7 +89,7 @@ const TableContainer = ({columns, data, isLoading, isError, noDataText, noFilter
         setPageSize(Number(event.target.value));
 
         //Go To Page 0 after changing PageSize
-        gotoPage(0);
+        // gotoPage(0);
     };
 
     // const onChangeInInput = (event) => {
@@ -125,6 +160,9 @@ const TableContainer = ({columns, data, isLoading, isError, noDataText, noFilter
                         </tbody>
                     </Table>}
 
+
+            {/*Building pagination right here!        */}
+
             <Row style={{maxWidth: 1000, margin: '0 auto', textAlign: 'center'}}>
 
                 <Col md={4}>
@@ -132,7 +170,7 @@ const TableContainer = ({columns, data, isLoading, isError, noDataText, noFilter
                         id='0'
                         type='select'
                         value={pageSize}
-                        onChange={onChangeInSelect}
+                        onChange={e => onChangeInSelect(e)}
                     >
                         >
                         {[10, 20, 30, 40, 50].map((pageSize) => (
