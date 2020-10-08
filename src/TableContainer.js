@@ -69,26 +69,6 @@ const TableContainer = ({
     }, [fetchData, pageIndex, pageSize])
 
 
-    // useEffect(() => {
-    //     fetchData({ pageIndex, pageSize });
-    //     //     .then(() => {
-    //     //         // isError = false;
-    //     //     // setTimeout(function() { //Start the timer
-    //     //     //     setLoading(false); //After 2 second, set render to true
-    //     //     //     setError(false);
-    //     //     // }, 2000)
-    //     // })
-    //     //     .catch(err => {
-    //     //         // setError(true);
-    //     //         // isLoading = false;
-    //     //         // isError = true;
-    //     //     });
-    // }, [fetchData, pageIndex, pageSize])
-
-    // const generateSortingIndicator = (column) => {
-    //     return column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : '';
-    // };
-
     const onChangeInSelect = (event) => {
         setPageSize(Number(event.target.value));
 

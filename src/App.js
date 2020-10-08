@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import Aux from './hoc/Auxiliary/Auxiliary'
 import DashboardNavbar from "./components/Dashboard/Navbar/DashboardNavbar";
 import DashboardFilterNavbar from  './components/Dashboard/Navbar/DashboardFilterNavbar'
@@ -15,66 +15,71 @@ const serverData = makeData(10000)
 
 const App = () => {
     const [data, setData] = useState([]);
-    const [loading,setLoading] = useState(true);
+    const [loading,setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [pageCount, setPageCount] = useState(10); //TODO NEED TO SET THIS
 
-    const fetchIdRef = React.useRef(0)
+    // const fetchIdRef = React.useRef(0);
 
-    const doFetch = async () => {
-        // const response = await axios.get('https://randomuser.me/api/?results=100');
-        const response = await axios.get('https://randomuser.me/api/?results=5');
-        const body = await response.data;
-        const contacts = body.results;
-        // console.log(contacts);
-        // setData(contacts);
-    }
+    // const doFetch = async () => {
+    //     // const response = await axios.get('https://randomuser.me/api/?results=100');
+    //     const response = await axios.get('https://randomuser.me/api/?results=5');
+    //     const body = await response.data;
+    //     const contacts = body.results;
+    //     // console.log(contacts);
+    //     // setData(contacts);
+    // }
 
-    const fetchData = React.useCallback(({ pageSize, pageIndex }) => {
+    const fetchData = useCallback(({ pageSize, pageIndex }) => {
         // This will get called when the table needs new data
         // You could fetch your data from literally anywhere,
         // even a server. But for this example, we'll just fake it.
 
         // Give this fetch an ID
-        const fetchId = ++fetchIdRef.current
+        // const fetchId = ++fetchIdRef.current
 
         // Set the loading state
-        setLoading(true)
+        setLoading(true);
 
         // We'll even set a delay to simulate a server here
-        setTimeout(() => {
-            // Only update the data if this is the latest fetch
-            if (fetchId === fetchIdRef.current) {
-                const startRow = pageSize * pageIndex
-                const endRow = startRow + pageSize
-                setData(serverData.slice(startRow, endRow))
+        // setTimeout(() => {
+        //     // Only update the data if this is the latest fetch
+        //     if (fetchId === fetchIdRef.current) {
+        //         const startRow = pageSize * pageIndex
+        //         const endRow = startRow + pageSize
+        //         setData(serverData.slice(startRow, endRow))
+        //
+        //         // Your server could send back total page count.
+        //         // For now we'll just fake it, too
+        //         setPageCount(Math.ceil(serverData.length / pageSize))
+        //
+        //         setLoading(false)
+        //     }
+        // }, 1000)
 
-                // Your server could send back total page count.
-                // For now we'll just fake it, too
-                setPageCount(Math.ceil(serverData.length / pageSize))
+        axios.get('https://randomuser.me/api/?results=5')
+            .then(response => {
 
-                setLoading(false)
-            }
-        }, 1000)
+                //get the data from response
+                const body = response.data;
+
+                //access the JSON data from body
+                const contacts = body.results;
+
+                //set pageCount, pageSize ???
+
+                setData(contacts);
+                setLoading(false);
+                setError(false);
+
+            })
+            .catch(() => {
+                setData([]);
+                setLoading(false);
+                setError(false);
+            });
+
     }, [])
-
-    // useEffect(() => {
-    //     // const doFetch = async () => {
-    //     //     await fetchMethod();
-    //     // };
-    //     doFetch()
-    //         .then((response) => {
-    //             setTimeout(function() { //Start the timer
-    //                 setLoading(false); //After 2 second, set render to true
-    //                 setError(false);
-    //                 setData(response.data);
-    //             }, 2000)
-    //         })
-    //         .catch(err => {
-    //             setLoading(false);
-    //             setError(true);
-    //         });
-    // }, []);
 
     const columns = useMemo(
         () => [
