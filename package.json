@@ -41,5 +41,8 @@
       "last 1 safari version",
       "IE 11"
     ]
+  },
+  "devDependencies": {
+    "namor": "^2.0.2"
   }
 }
